@@ -9,7 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    // singleton pattern 으로 데이터 공유 해서 마지막 페이지 까지 가지고 가야 함.
+    @IBOutlet weak var userId: UITextField!
+    @IBOutlet weak var userPass: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -25,7 +29,16 @@ class ViewController: UIViewController {
             print("signUpBarButton click")
         }
     }
-
+    // 로그인 버튼
+    @IBAction func btnLogin(_ sender: Any) {
+        print("btnLogin click")
+    }
+    
+    // 회원가입 버튼
+    @IBAction func btnSignup(_ sender: Any) {
+        print("btnSignUp click" )
+    }
+    
 
 }
 

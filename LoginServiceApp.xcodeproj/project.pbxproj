@@ -18,6 +18,7 @@
 		B7D3BB8824F28EB6006DB4C0 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = B7D3BB8724F28EB6006DB4C0 /* profile.png */; };
 		B7D3BB8A24F290F6006DB4C0 /* Join1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D3BB8924F290F6006DB4C0 /* Join1ViewController.swift */; };
 		B7D3BB8C24F29123006DB4C0 /* Join2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D3BB8B24F29123006DB4C0 /* Join2ViewController.swift */; };
+		B7D3BB8E24F62EF4006DB4C0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D3BB8D24F62EF4006DB4C0 /* UserInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		B7D3BB8724F28EB6006DB4C0 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		B7D3BB8924F290F6006DB4C0 /* Join1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join1ViewController.swift; sourceTree = "<group>"; };
 		B7D3BB8B24F29123006DB4C0 /* Join2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join2ViewController.swift; sourceTree = "<group>"; };
+		B7D3BB8D24F62EF4006DB4C0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				B7D3BB6224F262C7006DB4C0 /* LaunchScreen.storyboard */,
 				B7D3BB6524F262C7006DB4C0 /* Info.plist */,
 				B7D3BB8924F290F6006DB4C0 /* Join1ViewController.swift */,
+				B7D3BB8D24F62EF4006DB4C0 /* UserInfo.swift */,
 			);
 			path = LoginServiceApp;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				B7D3BB8A24F290F6006DB4C0 /* Join1ViewController.swift in Sources */,
 				B7D3BB5C24F262C5006DB4C0 /* ViewController.swift in Sources */,
 				B7D3BB5824F262C5006DB4C0 /* AppDelegate.swift in Sources */,
+				B7D3BB8E24F62EF4006DB4C0 /* UserInfo.swift in Sources */,
 				B7D3BB5A24F262C5006DB4C0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

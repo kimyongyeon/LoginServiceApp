@@ -9,11 +9,31 @@
 import UIKit
 
 class Join2ViewController: UIViewController {
-
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var dateLabel: UILabel!
+    let dateFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        formatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
+        return formatter
+    }()
+    
+    @IBAction func didDatePickerValueChanged(_ sender: UIDatePicker) {
+        print ("vlaue click")
+        let date: Date = sender.date
+        let dateString: String = self.dateFormatter.string(from: date)
+        self.dateLabel.text = dateString
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        // 데이터 이동은 싱글톤이 깔끔하고 좋다.
+        // 상황에 맞춰서 써야 하니까 무조건 쓸려고 하지 말고 다른 방법도 익혀 두도록.
+        print("userIfo: \(UserInfo.shared.name), \(UserInfo.shared.pass), \(UserInfo.shared.memo), \(UserInfo.shared.pic)")
+        
+        self.datePicker.addTarget(self, action: #selector(didDatePickerValueChanged(_:)), for: UIControl.Event.valueChanged)
     }
     @IBAction func btnCancel(_ sender: Any) {
         print("join2 btnCancel click")
@@ -24,7 +44,7 @@ class Join2ViewController: UIViewController {
     @IBAction func btnPrev(_ sender: Any) {
         print("join2 btnPrev click")
         let join1ViewController = self.storyboard?.instantiateViewController(identifier: "join1View") as! Join1ViewController
-        self.navigationController?.pushViewController(join1ViewController, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     /*
