@@ -26,6 +26,9 @@ class Join1ViewController: UIViewController {
         self.userRePass.text = nil
         self.userMemo.text = nil
         
+        self.userPass.isSecureTextEntry = true
+        self.userRePass.isSecureTextEntry = true 
+        
         self.picker.sourceType = .photoLibrary // 방식 선택. 앨범에서 가져오는걸로 선택.
         self.picker.allowsEditing = false // 수정가능하게 할지 선택. 하지만 false
         self.picker.delegate = self // picker delegate
@@ -57,8 +60,9 @@ class Join1ViewController: UIViewController {
         // 만약 스토리보드까지 연결해 놓으면 두번 호출 된다.
         // 당연한 걸까? 잘 모르겠다. 이유야 어찌됐든 한번만 호출해서 이대로 이해하고 넘어가자.
         print("join1 btnCancel click")
-        let loingViewController = self.storyboard?.instantiateViewController(identifier: "loginView") as! ViewController
-        self.navigationController?.pushViewController(loingViewController, animated: true)
+        
+        _ = self.storyboard?.instantiateViewController(identifier: "loginView") as! ViewController
+        self.navigationController?.popViewController(animated: true)
         
     }
     @IBAction func btnNext(_ sender: Any) {
@@ -66,13 +70,65 @@ class Join1ViewController: UIViewController {
         let userP1 = self.userPass.text ?? ""
         let userP2 = self.userRePass.text ?? ""
         let userM = self.userMemo.text ?? ""
-        print ("name:\(userNm), userP1:\(userP1), userP2:\(userP2), userMemo:\(userM)")
+        let pic = imgView.image.debugDescription
+        
+        print ("name:\(userNm), userP1:\(userP1), userP2:\(userP2), userMemo:\(userM), pic:\(pic)")
         
         // 싱글톤을 이용해서 넣는데 처음에는 인식을 못해서 xcode를 리스타트 하니까 잘된다. 버그가 아직 많은것 같다.
         UserInfo.shared.name = userNm
         UserInfo.shared.pass = userP1
         UserInfo.shared.memo = userM
-        UserInfo.shared.pic = "???"
+        UserInfo.shared.pic = pic
+        
+        func warningAlert (msg: String) {
+            let alert = UIAlertController(title: "경고", message: msg, preferredStyle: UIAlertController.Style.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .destructive, handler : nil)
+            alert.addAction(defaultAction)
+            present(alert, animated: false, completion: nil)
+        }
+        
+        guard userNm != "" else {
+            let msg = "이름은 필수 값입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        guard userP1 == userP2 else {
+            let msg = "비밀번호와 비밀번호확인은 같아야 합니다.."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        guard userP1 != "" else {
+            let msg = "비밀번호 필수값 입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        guard userP2 != "" else {
+            let msg = "비밀번호확인 필수값 입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        guard userM != "" else {
+            let msg = "유저메모 필수값 입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        print("pic:\(pic), \(pic.count)")
+        if pic.count == 3 {
+            let msg = "사진은 필수값 입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        
+        let join2View = self.storyboard?.instantiateViewController(identifier: "join2View") as! Join2ViewController
+        self.navigationController?.pushViewController(join2View, animated: true)
+        
+        
     }
     
     // 키보드 내리기

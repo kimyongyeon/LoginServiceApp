@@ -11,6 +11,7 @@ import UIKit
 class Join2ViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var userPhone: UITextField!
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -37,14 +38,66 @@ class Join2ViewController: UIViewController {
     }
     @IBAction func btnCancel(_ sender: Any) {
         print("join2 btnCancel click")
-        let loingViewController = self.storyboard?.instantiateViewController(identifier: "loginView") as! ViewController
-        self.navigationController?.pushViewController(loingViewController, animated: true)
+        
+        // 초기화
+        self.userPhone.text = ""
+        self.dateLabel.text = ""
+        
+//        let loingViewController = self.storyboard?.instantiateViewController(identifier: "loginView") as! ViewController
+//        self.navigationController?.pushViewController(loingViewController, animated: true)
     }
     
     @IBAction func btnPrev(_ sender: Any) {
         print("join2 btnPrev click")
         let join1ViewController = self.storyboard?.instantiateViewController(identifier: "join1View") as! Join1ViewController
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnJoin(_ sender: Any) {
+        
+        func warningAlert (msg: String) {
+            let alert = UIAlertController(title: "경고", message: msg, preferredStyle: UIAlertController.Style.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .destructive, handler : nil)
+            alert.addAction(defaultAction)
+            present(alert, animated: false, completion: nil)
+        }
+        
+        func celebrationAlert (msg: String) {
+            let alert = UIAlertController(title: "성공", message: msg, preferredStyle: UIAlertController.Style.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler : { (action) in
+                let loingViewController = self.storyboard?.instantiateViewController(identifier: "loginView") as! ViewController
+                self.navigationController?.pushViewController(loingViewController, animated: true)
+            })
+            alert.addAction(defaultAction)
+            present(alert, animated: false, completion: nil)
+        }
+        
+        
+        let phone = self.userPhone.text
+        let regDate = self.dateLabel.text
+        
+        UserInfo.shared.phone = phone
+        UserInfo.shared.regDate = regDate
+        
+        guard phone != "" else {
+            let msg = "phone number 필수 값 입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        guard regDate != "" else {
+            let msg = "regDate number 필수 값 입니다."
+            print(msg)
+            warningAlert(msg: msg)
+            return
+        }
+        
+        celebrationAlert(msg: "축하 합니다. 로그인 화면으로 이동 합니다.")
+        
+        
+        
+        
+        
     }
     
     /*
